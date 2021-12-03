@@ -16,13 +16,12 @@ spec:
   source:
     directory:
       recurse: true
-    path: ztp/gitops-subscriptions/argocd/resource-hook-example/policygentemplates
-    repoURL: https://github.com/openshift-kni/cnf-features-deploy
-    targetRevision: master
+    path: configuration
+    repoURL: http://172.27.17.54:8080/ztp/site-config.git
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-

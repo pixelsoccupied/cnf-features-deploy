@@ -78,3 +78,7 @@ tags
 .vscode/*
 .history
 # End of https://www.gitignore.io/api/go,vim,emacs,visualstudiocode
+#mac os
+.DS_Store
+#jetbrains
+.idea

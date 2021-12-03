@@ -14,9 +14,11 @@ spec:
     namespace: clusters-sub
   project: default
   source:
-    path: ztp/gitops-subscriptions/argocd/resource-hook-example/siteconfig
-    repoURL: https://github.com/openshift-kni/cnf-features-deploy
-    targetRevision: master
+    directory:
+      recurse: true
+    path: install
+    repoURL: http://172.27.17.54:8080/ztp/site-config.git
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
