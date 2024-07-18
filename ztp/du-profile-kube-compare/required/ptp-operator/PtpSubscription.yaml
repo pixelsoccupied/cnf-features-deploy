@@ -6,7 +6,7 @@ metadata:
 spec:
   channel: "stable"
   name: ptp-operator
-  source: redhat-operators-disconnected
+  source: {{ .spec.source }}
   sourceNamespace: openshift-marketplace
   installPlanApproval: Manual
 status:

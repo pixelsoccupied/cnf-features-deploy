@@ -5,7 +5,6 @@ Parts:
       - name: cluster-logging
         type: Required
         requiredTemplates:
-          - path: required/cluster-logging/ClusterLogCatSource.yaml
           - path: required/cluster-logging/ClusterLogging.yaml
           - path: required/cluster-logging/ClusterLogNS.yaml
           - path: required/cluster-logging/ClusterLogOperGroup.yaml
@@ -29,7 +28,6 @@ Parts:
         requiredTemplates:
           - path: required/machine-config/disable-crio-wipe/99-crio-disable-wipe-master.yaml
           - path: required/machine-config/disable-crio-wipe/99-crio-disable-wipe-worker.yaml
-          - path: required/machine-config/enable-cgroup-v1/enable-cgroup-v1.yaml
           - path: required/machine-config/kubelet-configuration-and-container-mount-hiding/01-container-mount-ns-and-kubelet-conf-master.yaml
           - path: required/machine-config/kubelet-configuration-and-container-mount-hiding/01-container-mount-ns-and-kubelet-conf-worker.yaml
           - path: required/machine-config/one-shot-time-sync/99-sync-time-once-master.yaml
@@ -48,7 +46,7 @@ Parts:
         type: Required
         requiredTemplates:
           - path: required/node-tuning-operator/PerformanceProfile.yaml
-          - path: required/node-tuning-operator/TunedPerformancePatch.yaml
+#          - path: required/node-tuning-operator/TunedPerformancePatch.yaml
   - name: required-ptp-operator
     Components:
       - name: ptp-operator
@@ -56,14 +54,11 @@ Parts:
         requiredTemplates:
           - path: required/ptp-operator/PtpConfigBoundary.yaml # TODO: the INI files embedded in PTPConfig are not handled. CNF-13528
           - path: required/ptp-operator/PtpConfigGmWpc.yaml
-          - path: required/ptp-operator/PtpConfigSlave.yaml
           - path: required/ptp-operator/PtpSubscription.yaml
             config:
               ignore-unspecified-fields: true
           - path: required/ptp-operator/PtpSubscriptionNS.yaml
           - path: required/ptp-operator/PtpSubscriptionOperGroup.yaml
-            config:
-              ignore-unspecified-fields: true
   - name: required-sriov-operator
     Components:
       - name: sriov-operator
@@ -195,3 +190,6 @@ fieldsToOmit:
   - - "metadata"
     - "annotations"
     - "olm.providedAPIs"
+
+templateFunctionFiles:
+  - validate_node_selector

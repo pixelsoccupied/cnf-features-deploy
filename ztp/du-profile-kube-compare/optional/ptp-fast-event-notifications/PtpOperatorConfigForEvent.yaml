@@ -4,8 +4,10 @@ metadata:
   name: default
   namespace: openshift-ptp
 spec:
+  {{- if .spec.daemonNodeSelector }}
   daemonNodeSelector:
-    node-role.kubernetes.io/master: ""
+    {{ template "matchNodeSelector" (list .spec.daemonNodeSelector "node-role.kubernetes.io" ) }}
+  {{- end }}
   ptpEventConfig:
     enableEventPublisher: true
     transportHost: {{ .spec.ptpEventConfig.transportHost }} # "http://ptp-event-publisher-service-NODE_NAME.openshift-ptp.svc.cluster.local:9043"

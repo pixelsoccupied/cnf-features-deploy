@@ -15,8 +15,10 @@ spec:
     {{- range .spec.nicSelector.pfNames }}
     - {{ . }}
     {{- end }}
+  {{- if .spec.nodeSelector }}
   nodeSelector:
-    node-role.kubernetes.io/master: ""
+    {{ template "matchNodeSelector" (list .spec.nodeSelector "node-role.kubernetes.io" ) }}
+  {{- end }}
   numVfs: {{ .spec.numVfs }}
   priority: {{ .spec.priority }}
   resourceName: {{ .spec.resourceName }}

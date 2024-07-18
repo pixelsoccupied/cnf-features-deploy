@@ -30,8 +30,10 @@ spec:
       {{- end }}
   machineConfigPoolSelector:
     pools.operator.machineconfiguration.openshift.io/master: ""
+  {{- if .spec.nodeSelector }}
   nodeSelector:
-    node-role.kubernetes.io/master: ''
+    {{ template "matchNodeSelector" (list .spec.nodeSelector "node-role.kubernetes.io" ) }}
+  {{- end }}
   numa:
     topologyPolicy: "restricted"
   # To use the standard (non-realtime) kernel, set enabled to false
@@ -42,6 +44,6 @@ spec:
     # See https://github.com/openshift/cluster-node-tuning-operator/blob/master/docs/performanceprofile/performance_profile.md#workloadhints
     # for detailed descriptions of each item.
     # The configuration below is set for a low latency, performance mode.
-    realTime: true
+    realTime: {{ .spec.workloadHints.realTime }}
     highPowerConsumption: false
     perPodPowerManagement: false

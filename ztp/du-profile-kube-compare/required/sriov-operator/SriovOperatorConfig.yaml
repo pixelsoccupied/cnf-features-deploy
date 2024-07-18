@@ -4,8 +4,10 @@ metadata:
   name: default
   namespace: openshift-sriov-network-operator
 spec:
+  {{- if .spec.configDaemonNodeSelector }}
   configDaemonNodeSelector:
-    "node-role.kubernetes.io/master": ""
+    {{ template "matchNodeSelector" (list .spec.configDaemonNodeSelector "node-role.kubernetes.io" ) }}
+  {{- end }}
   # Injector and OperatorWebhook pods can be disabled (set to "false") below
   # to reduce the number of management pods. It is recommended to start with the 
   # webhook and injector pods enabled, and only disable them after verifying the

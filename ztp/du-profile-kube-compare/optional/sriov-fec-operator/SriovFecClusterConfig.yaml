@@ -6,8 +6,10 @@ metadata:
 spec:
   drainSkip: {{ .spec.drainSkip }} # true if SNO, false by default
   priority: 1
+  {{- if .spec.nodeSelector }}
   nodeSelector:
-    node-role.kubernetes.io/master: ""
+    {{ template "matchNodeSelector" (list .spec.nodeSelector "node-role.kubernetes.io" ) }}
+  {{- end }}
   acceleratorSelector:
     pciAddress: {{ .spec.acceleratorSelector.pciAddress }}
   physicalFunction:  
