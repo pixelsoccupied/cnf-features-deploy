@@ -3,7 +3,7 @@
 {{- $answerValue := "B" }}
 {{- $prefix := index . 1 }}
 {{- range $key, $value := (index . 0) -}}
-	{{- if (or (eq ((list $prefix "/master") | join "") $key) (eq ((list $prefix "/worker") | join ""))) -}}
+	{{- if (or (eq ((list $prefix "/master") | join "") $key) (eq ((list $prefix "/worker") | join "") $key )) -}}
 		{{- $answerKey = $key}}
 		{{- $answerValue = $value }}
 		{{- break }}
