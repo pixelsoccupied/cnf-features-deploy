@@ -106,90 +106,44 @@ Parts:
               ignore-unspecified-fields: true
           - path: optional/sriov-fec-operator/SriovFecClusterConfig.yaml
 
-# TODO: Currently we will see diffs because of olm.operatorgroup.uid/{UUID}. CNF-13468
-fieldsToOmit:
-  - - "metadata"
-    - "annotations"
-    - "kubernetes.io/metadata.name"
-  - - "metadata"
-    - "annotations"
-    - "openshift.io/sa.scc.uid-range"
-  - - "metadata"
-    - "annotations"
-    - "kubernetes.io/metadata.name"
-  - - "metadata"
-    - "annotations"
-    - "openshift.io/sa.scc.mcs"
-  - - "metadata"
-    - "annotations"
-    - "openshift.io/sa.scc.supplemental-groups"
-  - - "metadata"
-    - "labels"
-    - "kubernetes.io/metadata.name"
-  - - "metadata"
-    - "labels"
-    - "olm.operatorgroup.uid"
-  - - "metadata"
-    - "labels"
-    - "pod-security.kubernetes.io"
-  - - "metadata"
-    - "labels"
-    - "security.openshift.io/scc.podSecurityLabelSync"
-  - - "metadata"
-    - "resourceVersion"
-  - - "metadata"
-    - "uid"
-  - - "spec"
-    - "finalizers"
-  - - "metadata"
-    - "creationTimestamp"
-  - - "metadata"
-    - "pod-security.kubernetes.io"
-  - - "metadata"
-    - "generation"
-  - - "status" # TODO:  We need to check status in Subscription and CatalogSource. CNF-13521
-  - - "metadata"
-    - "finalizers"
-  - - "metadata"
-    - "annotations"
-    - "ran.openshift.io/ztp-gitops-generated"
-  - - "spec"
-    - "ownerReferences"
-  - - "metadata"
-    - "ownerReferences"
-  - - "metadata"
-    - "annotations"
-    - "include.release.openshift.io/ibm-cloud-managed"
-  - - "metadata"
-    - "annotations"
-    - "include.release.openshift.io/self-managed-high-availability"
-  - - "metadata"
-    - "annotations"
-    - "include.release.openshift.io/single-node-developer"
-  - - "metadata"
-    - "annotations"
-    - "release.openshift.io/create-only"
-  - - "metadata"
-    - "labels"
-    - "lca.openshift.io/target-ocp-version"
-  - - "metadata"
-    - "labels"
-    - "pod-security.kubernetes.io/audit"
-  - - "metadata"
-    - "labels"
-    - "pod-security.kubernetes.io/audit-version"
-  - - "metadata"
-    - "labels"
-    - "pod-security.kubernetes.io/warn"
-  - - "metadata"
-    - "labels"
-    - "pod-security.kubernetes.io/warn-version"
-  - - "metadata"
-    - "annotations"
-    - "capability.openshift.io/name"
-  - - "metadata"
-    - "annotations"
-    - "olm.providedAPIs"
 
 templateFunctionFiles:
   - validate_node_selector
+
+fieldsToOmit:
+  defaultOmitRef: all
+  items:
+    all:
+      - pathToKey: metadata.annotations."kubernetes.io/metadata.name"
+      - pathToKey: metadata.annotations."openshift.io/sa.scc.uid-range"
+      - pathToKey: metadata.annotations."kubernetes.io/metadata.name"
+      - pathToKey: metadata.annotations."openshift.io/sa.scc.mcs"
+      - pathToKey: metadata.annotations."openshift.io/sa.scc.supplemental-groups"
+      - pathToKey: metadata.labels."kubernetes.io/metadata.name"
+      - pathToKey: metadata.labels."olm.operatorgroup.uid"
+      - pathToKey: metadata.labels."pod-security.kubernetes.io"
+      - pathToKey: metadata.labels."security.openshift.io/scc.podSecurityLabelSync"
+      - pathToKey: metadata.resourceVersion
+      - pathToKey: metadata.uid
+      - pathToKey: spec.finalizers
+      - pathToKey: metadata.creationTimestamp
+      - pathToKey: metadata."pod-security.kubernetes.io"
+      - pathToKey: metadata.generation
+      - pathToKey: status # TODO:  We need to check status in Subscription and CatalogSource. CNF-13521
+      - pathToKey: metadata.finalizers
+      - pathToKey: metadata.annotations."ran.openshift.io/ztp-gitops-generated"
+      - pathToKey: spec.ownerReferences
+      - pathToKey: metadata.ownerReferences
+      - pathToKey: metadata.annotations."include.release.openshift.io/ibm-cloud-managed"
+      - pathToKey: metadata.annotations."include.release.openshift.io/self-managed-high-availability"
+      - pathToKey: metadata.annotations."include.release.openshift.io/single-node-developer"
+      - pathToKey: metadata.annotations."release.openshift.io/create-only"
+      - pathToKey: metadata.labels."lca.openshift.io/target-ocp-version"
+      - pathToKey: metadata.labels."pod-security.kubernetes.io/audit"
+      - pathToKey: metadata.labels."pod-security.kubernetes.io/audit-version"
+      - pathToKey: metadata.labels."pod-security.kubernetes.io/warn"
+      - pathToKey: metadata.labels."pod-security.kubernetes.io/warn-version"
+      - pathToKey: metadata.annotations."capability.openshift.io/name"
+      - pathToKey: metadata.annotations."olm.providedAPIs"
+      - pathToKey: metadata.labels."olm.operatorgroup.uid/"
+        isPrefix: true
