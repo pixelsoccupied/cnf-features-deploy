@@ -156,6 +156,9 @@ metadata:
   labels: "{{ .Cluster.ClusterLabels }}"
   annotations:
     argocd.argoproj.io/sync-wave: "2"
+  labels:
+    cloud: auto-detect
+    vendor: auto-detect
 spec:
   hubAcceptsClient: true
 ---
@@ -169,9 +172,6 @@ metadata:
 spec:
   clusterName: "{{ .Cluster.ClusterName }}"
   clusterNamespace: "{{ .Cluster.ClusterName }}"
-  clusterLabels:
-    cloud: auto-detect
-    vendor: auto-detect
   applicationManager:
     enabled: false
   certPolicyController:
