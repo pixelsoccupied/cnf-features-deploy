@@ -21,9 +21,16 @@ spec:
     # the sitconfig.yaml exist AND use the ../../hack/patch-argocd-dev.sh script to re-patch the deployment-repo-server
 #    plugin:
 #      name: kustomize-with-local-plugins
+  ignoreDifferences:
+    - group: cluster.open-cluster-management.io
+      kind: ManagedCluster
+      jsonPointers:
+        - /metadata/labels/cloud
+        - /metadata/labels/vendor
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
